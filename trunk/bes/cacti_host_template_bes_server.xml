@@ -578,7 +578,7 @@
 		</inputs>
 	</hash_000015965546f5b31234bd9dcb1b68e539fb33>
 	<hash_000015470102df2b12569d3465ca7443ea7513>
-		<name>BES Recent Errors</name>
+		<name>BES Recent User Errors</name>
 		<graph>
 			<t_title></t_title>
 			<title>|host_description| - BES Recent Errors</title>
@@ -587,7 +587,7 @@
 			<t_height></t_height>
 			<height>120</height>
 			<t_width></t_width>
-			<width>500</width>
+			<width>600</width>
 			<t_slope_mode></t_slope_mode>
 			<slope_mode>on</slope_mode>
 			<t_auto_scale></t_auto_scale>
