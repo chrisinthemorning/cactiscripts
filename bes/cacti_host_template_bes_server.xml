@@ -581,7 +581,7 @@
 		<name>BES Recent User Errors</name>
 		<graph>
 			<t_title></t_title>
-			<title>|host_description| - BES Recent Errors</title>
+			<title>|host_description| - BES Recent User Errors</title>
 			<t_image_format_id></t_image_format_id>
 			<image_format_id>1</image_format_id>
 			<t_height></t_height>
@@ -1447,7 +1447,7 @@
 		<name>BES Recent Users with Errors</name>
 		<ds>
 			<t_name></t_name>
-			<name>BES Recent Users with Errors</name>
+			<name>|host_description| - BES Recent Users with Errors</name>
 			<data_input_id>hash_0300156cb514fa566100af09f31eee25d674bb</data_input_id>
 			<t_rra_id></t_rra_id>
 			<t_rrd_step></t_rrd_step>
@@ -1489,7 +1489,7 @@
 		<name>BES Recent Users without Errors</name>
 		<ds>
 			<t_name></t_name>
-			<name>BES Recent Users without Errors</name>
+			<name>|host_description| - BES Recent Users without Errors</name>
 			<data_input_id>hash_03001536a6b953d66af7b7365c0f26b2022b2c</data_input_id>
 			<t_rra_id></t_rra_id>
 			<t_rrd_step></t_rrd_step>
@@ -1511,7 +1511,7 @@
 				<t_rrd_heartbeat></t_rrd_heartbeat>
 				<rrd_heartbeat>600</rrd_heartbeat>
 				<t_data_input_field_id></t_data_input_field_id>
-				<data_input_field_id>hash_0700157706d71c9416ac832137ef2bac8d9666</data_input_field_id>
+				<data_input_field_id>hash_070015c82eab5ca22134242d72e10393ba415c</data_input_field_id>
 			</hash_0800155fd54f657758c092d9bf1bdd2cad04b3>
 		</items>
 		<data>
