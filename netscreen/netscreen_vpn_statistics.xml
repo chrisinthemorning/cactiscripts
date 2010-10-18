@@ -1,0 +1,59 @@
+<interface>
+        <name>Get NetScreen VPN</name>
+        <description>Queries a NetScreen for a list of monitorable VPN Policies</description>
+        <oid_index>1.3.6.1.4.1.3224.4.1.1.1</oid_index>
+        <index_order>RemoteIP:PolicyID</index_order>
+        <index_order_type>numeric</index_order_type>
+        <index_title_format>|chosen_order_field|</index_title_format>
+        <fields>
+                <RemoteIP>
+                        <name>Remote IP</name>
+                        <method>walk</method>
+                        <source>value</source>
+                        <direction>input</direction>
+                        <oid>1.3.6.1.4.1.3224.4.1.1.1.13</oid>
+                </RemoteIP>
+                <PolicyID>
+                        <name>Policy ID</name>
+                        <method>walk</method>
+                        <source>value</source>
+                        <direction>input</direction>
+                        <oid>1.3.6.1.4.1.3224.4.1.1.1.2</oid>
+                </PolicyID>
+                <VPNName>
+                        <name>VPN Used Name</name>
+                        <method>walk</method>
+                        <source>value</source>
+                        <direction>input</direction>
+                        <oid>1.3.6.1.4.1.3224.4.1.1.1.4</oid>
+                </VPNName>
+                <VPNBytesIn>
+                        <name>VPN Bytes In</name>
+                        <method>walk</method>
+                        <source>value</source>
+                        <direction>output</direction>
+                        <oid>1.3.6.1.4.1.3224.4.1.1.1.35</oid>
+                </VPNBytesIn>
+                <VPNBytesOut>
+                        <name>VPN Bytes Out</name>
+                        <method>walk</method>
+                        <source>value</source>
+                        <direction>output</direction>
+                        <oid>1.3.6.1.4.1.3224.4.1.1.1.36</oid>
+                </VPNBytesOut>
+                <VPNPacketsIn>
+                        <name>VPN Packets In</name>
+                        <method>walk</method>
+                        <source>value</source>
+                        <direction>output</direction>
+                        <oid>1.3.6.1.4.1.3224.4.1.1.1.37</oid>
+                </VPNPacketsIn>
+                <VPNPacketsOut>
+                        <name>VPN Packets Out</name>
+                        <method>walk</method>
+                        <source>value</source>
+                        <direction>output</direction>
+                        <oid>1.3.6.1.4.1.3224.4.1.1.1.38</oid>
+                </VPNPacketsOut>
+        </fields>
+</interface>
