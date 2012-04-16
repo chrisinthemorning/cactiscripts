@@ -212,6 +212,16 @@ if (sizeof($parms)) {
 			}
 		}
 
+		/* is an snmp-query-type-id is given, print the related Graph Templates */
+                if ($dsGraph["snmpQueryType"] != "") {
+                        $graphTemplates = getGraphTemplatesBySnmpQueryTypeId($dsGraph["snmpQueryType"]);
+                        if (!sizeof($graphTemplates)) {
+				echo "ERROR: Unknown snmp-query-type-id (" . $dsGraph["snmpQueryType"] . ")\n";
+                                echo "Try --list-query-types\n";
+                                exit(1);
+                        }
+                }
+
 		displayGraphTemplates($graphTemplates, $quietMode);
 
 		exit(0);
@@ -570,7 +580,7 @@ function display_help() {
 	echo "                    3|Fields = Verify all Fields\n";
 	echo "List Options:\n";
 	echo "    --list-hosts\n";
-	echo "    --list-graph-templates [--host-template-id=[ID]]\n";
+	echo "    --list-graph-templates [--host-template-id=[ID]] [--snmp-query-type-id=[ID]]\n";
 	echo "    --list-input-fields --graph-template-id=[ID]\n";
 	echo "    --list-snmp-queries\n";
 	echo "    --list-query-types  --snmp-query-id [ID]\n";
