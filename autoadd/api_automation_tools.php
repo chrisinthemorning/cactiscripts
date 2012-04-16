@@ -1,7 +1,7 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | Copyright (C) 2004-2011 The Cacti Group                                 |
+ | Copyright (C) 2004-2012 The Cacti Group                                 |
  |                                                                         |
  | This program is free software; you can redistribute it and/or           |
  | modify it under the terms of the GNU General Public License             |
@@ -223,6 +223,24 @@ function getGraphTemplatesByHostTemplate($host_template_id) {
 	}
 
 	return $graph_templates;
+}
+
+function getGraphTemplatesBySnmpQueryTypeId($snmp_query_type_id) {
+        $graph_templates = array();
+        $tmpArray= db_fetch_assoc("SELECT " .
+				"snmp_query_graph.id as QueryTypeId, graph_templates.id as GraphTemplateId " .
+                                "from snmp_query_graph " .
+                                "left join graph_templates on (snmp_query_graph.graph_template_id=graph_templates.id) " .
+                                "where snmp_query_graph.snmp_query_id=$snmp_query_type_id " .
+                                "order by snmp_query_graph.name");
+
+	if (sizeof($tmpArray)) {
+                foreach ($tmpArray as $t) {
+                        $graph_templates[$t["QueryTypeId"]] = $t["GraphTemplateId"];
+                }
+        }
+
+        return $graph_templates;
 }
 
 function displayQueryTypes($types, $quietMode = FALSE) {
@@ -599,4 +617,3 @@ function displayUsers($quietMode = FALSE) {
 }
 
 ?>
-
