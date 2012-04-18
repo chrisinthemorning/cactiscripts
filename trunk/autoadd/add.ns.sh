@@ -14,7 +14,7 @@ parentnode=`./add_tree.php --list-nodes --tree-id=$treeid | grep 'Load Balancers
 
 ./add_tree.php --type=node --node-type=host --tree-id=$treeid --parent-node=$parentnode --host-id=$hostid
 
-#add basic graphs
+#add basic graphs 
 ./add_graphs.php --quiet --list-graph-templates --host-template-id=$templateid | cut -f1 | xargs -I {} ./add_graphs.php --graph-type=cg --graph-template-id={} --host-id=$hostid
 
 #add snmp data for interfaces , like discards and errors
@@ -22,3 +22,4 @@ parentnode=`./add_tree.php --list-nodes --tree-id=$treeid | grep 'Load Balancers
 
 #add dynamic graphs like vserver stats
 ./update.ns.sh $hostid $templateid
+
