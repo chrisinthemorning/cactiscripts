@@ -225,13 +225,13 @@ function getGraphTemplatesByHostTemplate($host_template_id) {
 	return $graph_templates;
 }
 
-function getGraphTemplatesBySnmpQueryTypeId($snmp_query_type_id) {
+function getGraphTemplatesBySnmpQueryId($snmp_query_id) {
         $graph_templates = array();
         $tmpArray= db_fetch_assoc("SELECT " .
 				"snmp_query_graph.id as QueryTypeId, graph_templates.id as GraphTemplateId " .
                                 "from snmp_query_graph " .
                                 "left join graph_templates on (snmp_query_graph.graph_template_id=graph_templates.id) " .
-                                "where snmp_query_graph.snmp_query_id=$snmp_query_type_id " .
+                                "where snmp_query_graph.snmp_query_id=$snmp_query_id " .
                                 "order by snmp_query_graph.name");
 
 	if (sizeof($tmpArray)) {
@@ -364,6 +364,20 @@ function displayGraphTemplates($templates, $quietMode = FALSE) {
 	if (!$quietMode) {
 		echo "\n";
 	}
+}
+
+function displayGraphTemplatesByQueryId($templates, $quietMode = FALSE) {
+        if (!$quietMode) {
+                echo "Known Graph Templates:(snmp-query-type-id, graph-template-id)\n";
+        }
+
+        while (list($id, $name) = each ($templates)) {
+                echo $id . "\t" . $name . "\n";
+        }
+
+        if (!$quietMode) {
+                echo "\n";
+        }
 }
 
 function displayHosts($hosts, $quietMode = FALSE) {

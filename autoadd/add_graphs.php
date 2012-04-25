@@ -212,17 +212,21 @@ if (sizeof($parms)) {
 			}
 		}
 
-		/* is an snmp-query-type-id is given, print the related Graph Templates */
-                if ($dsGraph["snmpQueryType"] != "") {
-                        $graphTemplates = getGraphTemplatesBySnmpQueryTypeId($dsGraph["snmpQueryType"]);
+		/* is an snmp-query-id is given, print the related Graph Templates */
+                if ($dsGraph["snmpQueryId"] != "") {
+                        $graphTemplates = getGraphTemplatesBySnmpQueryId($dsGraph["snmpQueryId"]);
                         if (!sizeof($graphTemplates)) {
-				echo "ERROR: Unknown snmp-query-type-id (" . $dsGraph["snmpQueryType"] . ")\n";
-                                echo "Try --list-query-types\n";
+				echo "ERROR: Unknown snmp-query-id (" . $dsGraph["snmpQueryId"] . ")\n";
+                                echo "Try --list-snmp-queries\n";
                                 exit(1);
                         }
                 }
 
-		displayGraphTemplates($graphTemplates, $quietMode);
+		if ($dsGraph["snmpQueryId"] != "") {
+			displayGraphTemplatesByQueryId($graphTemplates, $quietMode);
+		} else {
+			displayGraphTemplates($graphTemplates, $quietMode);
+		}
 
 		exit(0);
 	}
