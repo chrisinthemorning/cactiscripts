@@ -1,6 +1,5 @@
 #!/usr/bin/perl -w
 
-
 #use strict;
 use JSON -support_by_pp;
 use HTTP::Request;
@@ -19,8 +18,9 @@ $content = fetch_json($json_url);
 my $json = new JSON;
 my $json_text = $json->allow_nonref->utf8->relaxed->escape_slash->loose->allow_singlequote->allow_barekey->decode($content);
 
-while (my ($key, $value) = each %{$json_text->{$nitroapi}}) {
- if (looks_like_number($value)) {
+foreach $key (sort keys %{$json_text->{$nitroapi}}) {
+  my $value = ${$json_text->{$nitroapi}}{$key};
+   if (looks_like_number($value)) {
     my $rvalue = sprintf "%.0f", $value;
     print "$key:$rvalue ";
  }
