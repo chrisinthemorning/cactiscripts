@@ -1,0 +1,228 @@
+<interface>
+  <name>Get Netscaler Interface Information</name>
+  <script_path>/usr/bin/perl |path_cacti|/scripts/nitro_query_ns.pl</script_path>
+  <arg_prepend>|host_hostname| soap_stats 37GvYs12t5 Interface</arg_prepend>
+  <arg_index>index id</arg_index>
+  <arg_query>query id</arg_query>
+  <arg_get>get name</arg_get>
+  <arg_num_indexes>num_indexes</arg_num_indexes>
+  <output_delimeter>!</output_delimeter>
+  <index_order>id</index_order>
+  <fields>
+  <id>
+        <name>id</name>
+        <direction>input</direction>
+        <query_name>id</query_name>
+</id>
+<curintfstate>
+        <name>curintfstate</name>
+        <direction>input</direction>
+        <query_name>curintfstate</query_name>
+</curintfstate>
+<curlinkstate>
+        <name>curlinkstate</name>
+        <direction>input</direction>
+        <query_name>curlinkstate</query_name>
+</curlinkstate>
+<curlinkdowntime>
+        <name>curlinkdowntime</name>
+        <direction>input</direction>
+        <query_name>curlinkdowntime</query_name>
+</curlinkdowntime>
+<curlinkuptime>
+        <name>curlinkuptime</name>
+        <direction>input</direction>
+        <query_name>curlinkuptime</query_name>
+</curlinkuptime>
+<errpkttx>
+        <name>errpkttx</name>
+        <direction>output</direction>
+        <query_name>errpkttx</query_name>
+</errpkttx>
+<nicrxstalls>
+        <name>nicrxstalls</name>
+        <direction>output</direction>
+        <query_name>nicrxstalls</query_name>
+</nicrxstalls>
+<rxlacpdurate>
+        <name>rxlacpdurate</name>
+        <direction>output</direction>
+        <query_name>rxlacpdurate</query_name>
+</rxlacpdurate>
+<totnetscalerpkts>
+        <name>totnetscalerpkts</name>
+        <direction>output</direction>
+        <query_name>totnetscalerpkts</query_name>
+</totnetscalerpkts>
+<nictotmulticastpkts>
+        <name>nictotmulticastpkts</name>
+        <direction>output</direction>
+        <query_name>nictotmulticastpkts</query_name>
+</nictotmulticastpkts>
+<totrxbytes>
+        <name>totrxbytes</name>
+        <direction>output</direction>
+        <query_name>totrxbytes</query_name>
+</totrxbytes>
+<linkreinits>
+        <name>linkreinits</name>
+        <direction>output</direction>
+        <query_name>linkreinits</query_name>
+</linkreinits>
+<txbytesrate>
+        <name>txbytesrate</name>
+        <direction>output</direction>
+        <query_name>txbytesrate</query_name>
+</txbytesrate>
+<rxlacpdu>
+        <name>rxlacpdu</name>
+        <direction>output</direction>
+        <query_name>rxlacpdu</query_name>
+</rxlacpdu>
+<nicerrdisables>
+        <name>nicerrdisables</name>
+        <direction>output</direction>
+        <query_name>nicerrdisables</query_name>
+</nicerrdisables>
+<txpktsrate>
+        <name>txpktsrate</name>
+        <direction>output</direction>
+        <query_name>txpktsrate</query_name>
+</txpktsrate>
+<netscalerpktsrate>
+        <name>netscalerpktsrate</name>
+        <direction>output</direction>
+        <query_name>netscalerpktsrate</query_name>
+</netscalerpktsrate>
+<tottxpkts>
+        <name>tottxpkts</name>
+        <direction>output</direction>
+        <query_name>tottxpkts</query_name>
+</tottxpkts>
+<macmovedrate>
+        <name>macmovedrate</name>
+        <direction>output</direction>
+        <query_name>macmovedrate</query_name>
+</macmovedrate>
+<txlacpdu>
+        <name>txlacpdu</name>
+        <direction>output</direction>
+        <query_name>txlacpdu</query_name>
+</txlacpdu>
+<errdroppedrxpktsrate>
+        <name>errdroppedrxpktsrate</name>
+        <direction>output</direction>
+        <query_name>errdroppedrxpktsrate</query_name>
+</errdroppedrxpktsrate>
+<errnicmuted>
+        <name>errnicmuted</name>
+        <direction>output</direction>
+        <query_name>errnicmuted</query_name>
+</errnicmuted>
+<errdroppedtxpkts>
+        <name>errdroppedtxpkts</name>
+        <direction>output</direction>
+        <query_name>errdroppedtxpkts</query_name>
+</errdroppedtxpkts>
+<nicerrifoutdiscardsrate>
+        <name>nicerrifoutdiscardsrate</name>
+        <direction>output</direction>
+        <query_name>nicerrifoutdiscardsrate</query_name>
+</nicerrifoutdiscardsrate>
+<errifindiscardsrate>
+        <name>errifindiscardsrate</name>
+        <direction>output</direction>
+        <query_name>errifindiscardsrate</query_name>
+</errifindiscardsrate>
+<nicerrifoutdiscards>
+        <name>nicerrifoutdiscards</name>
+        <direction>output</direction>
+        <query_name>nicerrifoutdiscards</query_name>
+</nicerrifoutdiscards>
+<errpktrx>
+        <name>errpktrx</name>
+        <direction>output</direction>
+        <query_name>errpktrx</query_name>
+</errpktrx>
+<errifindiscards>
+        <name>errifindiscards</name>
+        <direction>output</direction>
+        <query_name>errifindiscards</query_name>
+</errifindiscards>
+<nicmulticastpktsrate>
+        <name>nicmulticastpktsrate</name>
+        <direction>output</direction>
+        <query_name>nicmulticastpktsrate</query_name>
+</nicmulticastpktsrate>
+<totrxpkts>
+        <name>totrxpkts</name>
+        <direction>output</direction>
+        <query_name>totrxpkts</query_name>
+</totrxpkts>
+<totmacmoved>
+        <name>totmacmoved</name>
+        <direction>output</direction>
+        <query_name>totmacmoved</query_name>
+</totmacmoved>
+<rxbytesrate>
+        <name>rxbytesrate</name>
+        <direction>output</direction>
+        <query_name>rxbytesrate</query_name>
+</rxbytesrate>
+<rxpktsrate>
+        <name>rxpktsrate</name>
+        <direction>output</direction>
+        <query_name>rxpktsrate</query_name>
+</rxpktsrate>
+<errduplexmismatch>
+        <name>errduplexmismatch</name>
+        <direction>output</direction>
+        <query_name>errduplexmismatch</query_name>
+</errduplexmismatch>
+<tottxbytes>
+        <name>tottxbytes</name>
+        <direction>output</direction>
+        <query_name>tottxbytes</query_name>
+</tottxbytes>
+<errpktrxrate>
+        <name>errpktrxrate</name>
+        <direction>output</direction>
+        <query_name>errpktrxrate</query_name>
+</errpktrxrate>
+<errlinkhangs>
+        <name>errlinkhangs</name>
+        <direction>output</direction>
+        <query_name>errlinkhangs</query_name>
+</errlinkhangs>
+<errdroppedrxpkts>
+        <name>errdroppedrxpkts</name>
+        <direction>output</direction>
+        <query_name>errdroppedrxpkts</query_name>
+</errdroppedrxpkts>
+<errdroppedtxpktsrate>
+        <name>errdroppedtxpktsrate</name>
+        <direction>output</direction>
+        <query_name>errdroppedtxpktsrate</query_name>
+</errdroppedtxpktsrate>
+<errpkttxrate>
+        <name>errpkttxrate</name>
+        <direction>output</direction>
+        <query_name>errpkttxrate</query_name>
+</errpkttxrate>
+<nictxstalls>
+        <name>nictxstalls</name>
+        <direction>output</direction>
+        <query_name>nictxstalls</query_name>
+</nictxstalls>
+<txlacpdurate>
+        <name>txlacpdurate</name>
+        <direction>output</direction>
+        <query_name>txlacpdurate</query_name>
+</txlacpdurate>
+<nicstsstalls>
+        <name>nicstsstalls</name>
+        <direction>output</direction>
+        <query_name>nicstsstalls</query_name>
+</nicstsstalls>
+</fields>
+</interface>
