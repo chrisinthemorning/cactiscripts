@@ -1,0 +1,149 @@
+<services>
+  <name>Get Netscaler Service Information</name>
+  <script_path>/usr/bin/perl |path_cacti|/scripts/nitro_query_ns.pl</script_path>
+  <arg_prepend>|host_hostname| soap_stats 232323 service</arg_prepend>
+  <arg_index>index name</arg_index>
+  <arg_query>query name</arg_query>
+  <arg_get>get name</arg_get>
+  <arg_num_indexes>num_indexes</arg_num_indexes>
+  <output_delimeter>!</output_delimeter>
+  <index_order>servicename</index_order>
+  <fields>
+    <servicename>
+      <name>servicename</name>
+      <direction>input</direction>
+      <query_name>name</query_name>
+    </servicename>
+<servicetype>
+  <name>servicetype</name>
+  <direction>input</direction>
+  <query_name>servicetype</query_name>
+</servicetype>
+<primaryipaddress>
+  <name>primaryipaddress</name>
+  <direction>input</direction>
+  <query_name>primaryipaddress</query_name>
+</primaryipaddress>
+<state>
+  <name>state</name>
+  <direction>input</direction>
+  <query_name>state</query_name>
+</state>
+<svrestablishedconn>
+  <name>svrestablishedconn</name>
+  <direction>output</direction>
+  <query_name>svrestablishedconn</query_name>
+</svrestablishedconn>
+<curclntconnections>
+  <name>curclntconnections</name>
+  <direction>output</direction>
+  <query_name>curclntconnections</query_name>
+</curclntconnections>
+<totalpktssent>
+  <name>totalpktssent</name>
+    <direction>output</direction>
+  <query_name>totalpktssent</query_name>
+</totalpktssent>
+<activetransactions>
+  <name>activetransactions</name>
+  <direction>output</direction>
+  <query_name>activetransactions</query_name>
+</activetransactions>
+<totalrequests>
+  <name>totalrequests</name>
+  <direction>output</direction>
+  <query_name>totalrequests</query_name>
+</totalrequests>
+<responsesrate>
+  <name>responsesrate</name>
+  <direction>output</direction>
+  <query_name>responsesrate</query_name>
+</responsesrate>
+<maxclients>
+  <name>maxclients</name>
+  <direction>output</direction>
+  <query_name>maxclients</query_name>
+</maxclients>
+<avgsvrttfb>
+  <name>avgsvrttfb</name>
+  <direction>output</direction>
+  <query_name>avgsvrttfb</query_name>
+</avgsvrttfb>
+<surgecount>
+  <name>surgecount</name>
+  <direction>output</direction>
+  <query_name>surgecount</query_name>
+</surgecount>
+<curload>
+  <name>curload</name>
+  <direction>output</direction>
+  <query_name>curload</query_name>
+</curload>
+<totalresponses>
+  <name>totalresponses</name>
+  <direction>output</direction>
+  <query_name>totalresponses</query_name>
+</totalresponses>
+<totalrequestbytes>
+  <name>totalrequestbytes</name>
+  <direction>output</direction>
+  <query_name>totalrequestbytes</query_name>
+</totalrequestbytes>
+<curreusepool>
+  <name>curreusepool</name>
+  <direction>output</direction>
+  <query_name>curreusepool</query_name>
+</curreusepool>
+<totalpktsrecvd>
+  <name>totalpktsrecvd</name>
+  <direction>output</direction>
+  <query_name>totalpktsrecvd</query_name>
+</totalpktsrecvd>
+<throughput>
+  <name>throughput</name>
+  <direction>output</direction>
+  <query_name>throughput</query_name>
+</throughput>
+<throughputrate>
+  <name>throughputrate</name>
+  <direction>output</direction>
+  <query_name>throughputrate</query_name>
+</throughputrate>
+<vsvrservicehits>
+  <name>vsvrservicehits</name>
+  <direction>output</direction>
+  <query_name>vsvrservicehits</query_name>
+</vsvrservicehits>
+<totalresponsebytes>
+  <name>totalresponsebytes</name>
+  <direction>output</direction>
+  <query_name>totalresponsebytes</query_name>
+</totalresponsebytes>
+<primaryport>
+  <name>primaryport</name>
+  <direction>output</direction>
+  <query_name>primaryport</query_name>
+</primaryport>
+<requestsrate>
+  <name>requestsrate</name>
+  <direction>output</direction>
+  <query_name>requestsrate</query_name>
+</requestsrate>
+<curtflags>
+  <name>curtflags</name>
+  <direction>output</direction>
+  <query_name>curtflags</query_name>
+</curtflags>
+<cursrvrconnections>
+  <name>cursrvrconnections</name>
+  <direction>output</direction>
+  <query_name>cursrvrconnections</query_name>
+</cursrvrconnections>
+<vsvrservicehitsrate>
+  <name>vsvrservicehitsrate</name>
+  <direction>output</direction>
+  <query_name>vsvrservicehitsrate</query_name>
+</vsvrservicehitsrate>
+  </fields>
+</services>
+
