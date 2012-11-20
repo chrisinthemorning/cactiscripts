@@ -1,61 +1,53 @@
 <?PHP
-// wget -O- --user nsroot --password nsroot http://192.168.255.56/nitro/v1/stat/lbvserver | tr ',' '\n'
 
-// jSON URL which should be requested
+$no_http_headers = true;
 
-$json_url = 'http://192.168.255.56/nitro/v1/stat/lbvserver';
-//$json_url = 'http://192.168.255.56/nitro/v1/stat/protocoltcp';
- 
-$username = 'nsroot';  // authentication
-$password = 'nsroot';  // authentication
+/* display No errors */
+error_reporting(E_ERROR);
 
-// $host     = $ARGV[0];
-// $username = $ARGV[1];
-// $password = $ARGV[2];
-// $nitroapi = $ARGV[3];
-// $json_url = "http://$host/nitro/v1/stat/$nitroapi/";
- 
-// Curl
-$ch = curl_init( $json_url );
-$options = array(
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_BINARYTRANSFER => true,
-CURLOPT_SSL_VERIFYPEER => false,
-CURLOPT_USERPWD => $username . ":" . $password,   // authentication
-);
-curl_setopt_array( $ch, $options );
-$result =  curl_exec($ch); // Getting jSON result string
+include_once(dirname(__FILE__) . "/../include/config.php");
+include_once(dirname(__FILE__) . "/../lib/snmp.php");
 
-// Json
-$json_result=json_decode($result,true);
-
-// Memcache
-//$memcache = new Memcache;
-//$memcache->connect('localhost', 11211) or die ("Could not connect");
-//$memcache->set('key', $json_result, false, 10) or die ("Failed to save data at the server");
-//$get_result = $memcache->get('key');
-
-// Split out json kvpairs into memcache kvpairs
-foreach ($json_result as $key1 => $val1) { // This will search in the 2 jsons
-  if (is_array($val1)) {
-     foreach($val1 as $key2 => $val2) {
-//			if (is_array($value) && $value['name'] == 'blah3') {
-			if (is_array($val2)) {
-				foreach($val2 as $key3 => $val3) {
-				echo "$key3 $val3\n";
-				}
-			} else {
-				 // if ( looks_like_number($value) ) {
-					 // my $rvalue = sprintf "%.0f", $value;
-				echo "$key2:$val2\n";
-			}
-		}
-    } 
+if (!isset($called_by_script_server)) {
+        array_shift($_SERVER["argv"]);
+        print call_user_func_array("ss_nitro", $_SERVER["argv"]);
 }
-
-
-// Output
-// echo var_dump($get_result)
-
+function ss_nitro($host, $username, $password, $nitroapi, $cmd, $arg1 = "", $arg2 = "", $arg3 = "") {
+        $json_url = "http://$host/nitro/v1/stat/$nitroapi/";
+        // Curl
+        $ch = curl_init( $json_url );
+        $options = array(
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_BINARYTRANSFER => true,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_USERPWD => $username . ":" . $password,   // authentication
+        );
+        curl_setopt_array( $ch, $options );
+        $result =  curl_exec($ch);
+        $json_result=json_decode($result,true);
+        foreach ($json_result as $key1 => $val1) {
+        if (is_array($val1)) {
+                        if ($cmd == 'num_indexes') {
+                                echo count($val1);
+                        } else {
+                     foreach($val1 as $key2 => $val2) {
+                                        if (is_array($val2)) {
+                                                if($cmd == 'get' && $arg3 == $val2[$arg1] && !is_null($val2[$arg2]) ) {
+                                                        return $val2[$arg2];
+                                                } elseif ($cmd == 'query' ) {
+                                print $val2[$arg1] . "!" . $val2[$arg2] . "\n";
+                                                } elseif ($cmd == 'index' && !is_null($val2[$arg1]) ) {
+                                                        print $val2[$arg1] . "\n";
+                                                }
+                                        } else {
+                                                if (is_numeric($val2)) {
+                                                         $prettyval2 = sprintf("%.0f", $val2);
+                                                         echo "$key2:$prettyval2 ";
+                                                }
+                                        }
+                                }
+                    }
+            }
+        }
+}
 ?>
-
