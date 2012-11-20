@@ -24,7 +24,13 @@ function ss_nitro($host, $username, $password, $nitroapi, $cmd, $arg1 = "", $arg
         );
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
-        $json_result=json_decode($result,true);
+        // Memcache
+        $memcache = new Memcache;
+        $memcache->connect('localhost', 11211) or die ("Could not connect");
+        $memcache->set('key', $json_result, false, 10) or die ("Failed to save data at the server");
+        $get_result = $memcache->get('key');
+        
+        $json_result=json_decode($get_result,true);
         foreach ($json_result as $key1 => $val1) {
         if (is_array($val1)) {
                         if ($cmd == 'num_indexes') {
