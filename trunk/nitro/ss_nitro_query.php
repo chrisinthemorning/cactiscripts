@@ -8,52 +8,53 @@ error_reporting(E_ERROR);
 include_once(dirname(__FILE__) . "/../include/config.php");
 include_once(dirname(__FILE__) . "/../lib/snmp.php");
 
+require "/usr/share/cacti/resource/script_server/predis/autoload.php";
+Predis\Autoloader::register();
+$gredis = new Predis\Client();
+
 if (!isset($called_by_script_server)) {
         array_shift($_SERVER["argv"]);
         print call_user_func_array("ss_nitro", $_SERVER["argv"]);
 }
+
 function ss_nitro($host, $username, $password, $nitroapi, $cmd, $arg1 = "", $arg2 = "", $arg3 = "") {
-        $json_url = "http://$host/nitro/v1/stat/$nitroapi/";
-        // Curl
+    $redis = $GLOBALS['gredis'];
+    $json_url = "http://$host/nitro/v1/stat/$nitroapi/";
+    // Curl
+    if (!$redis->exists($json_url)) {
         $ch = curl_init( $json_url );
-        $options = array(
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_BINARYTRANSFER => true,
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLOPT_USERPWD => $username . ":" . $password,   // authentication
-        );
+        $options = array(CURLOPT_RETURNTRANSFER => true,CURLOPT_BINARYTRANSFER => true,CURLOPT_SSL_VERIFYPEER => false,CURLOPT_USERPWD => $username . ":" . $password,);
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
-        // Memcache
-        $memcache = new Memcache;
-        $memcache->connect('localhost', 11211) or die ("Could not connect");
-        $memcache->set('key', $json_result, false, 10) or die ("Failed to save data at the server");
-        $get_result = $memcache->get('key');
-        
-        $json_result=json_decode($get_result,true);
-        foreach ($json_result as $key1 => $val1) {
-        if (is_array($val1)) {
-                        if ($cmd == 'num_indexes') {
-                                echo count($val1);
-                        } else {
-                     foreach($val1 as $key2 => $val2) {
-                                        if (is_array($val2)) {
-                                                if($cmd == 'get' && $arg3 == $val2[$arg1] && !is_null($val2[$arg2]) ) {
-                                                        return $val2[$arg2];
-                                                } elseif ($cmd == 'query' ) {
-                                print $val2[$arg1] . "!" . $val2[$arg2] . "\n";
-                                                } elseif ($cmd == 'index' && !is_null($val2[$arg1]) ) {
-                                                        print $val2[$arg1] . "\n";
-                                                }
-                                        } else {
-                                                if (is_numeric($val2)) {
-                                                         $prettyval2 = sprintf("%.0f", $val2);
-                                                         echo "$key2:$prettyval2 ";
-                                                }
-                                        }
-                                }
-                    }
-            }
-        }
+        $redis->set($json_url,$result);
+        $redis->expire($json_url,60);
+    } else {
+    	$result=$redis->get($json_url);
+    }
+    $json_result=json_decode($result,true);
+    foreach ($json_result as $key1 => $val1) {
+		if (is_array($val1)) {
+			if ($cmd == 'num_indexes') {
+				echo count($val1);
+			} else {
+				foreach($val1 as $key2 => $val2) {
+					if (is_array($val2)) {
+						if($cmd == 'get' && $arg3 == $val2[$arg1] && !is_null($val2[$arg2]) ) {
+							return $val2[$arg2];
+						} elseif ($cmd == 'query' ) {
+							print $val2[$arg1] . "!" . $val2[$arg2] . "\n";
+						} elseif ($cmd == 'index' && !is_null($val2[$arg1]) ) {
+							print $val2[$arg1] . "\n";
+						}
+					} else {
+						if (is_numeric($val2)) {
+							$prettyval2 = sprintf("%.0f", $val2);
+							echo "$key2:$prettyval2 ";
+						}
+					}
+				}
+			}
+		}
+	}
 }
 ?>
