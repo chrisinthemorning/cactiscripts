@@ -1,0 +1,1 @@
+These are my scripts and templates for Cacti so I don't lose them
